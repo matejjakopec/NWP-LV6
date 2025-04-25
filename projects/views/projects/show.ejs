@@ -1,0 +1,36 @@
+<head>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+
+<hr>
+
+<nav>
+  <a href="/projects/new">➕ New Project</a>
+  <a href="/projects">All Projects</a>
+</nav>
+
+<h1><%= project.name %></h1>
+<p><%= project.description %></p>
+<p>Price: <%= project.price %> €</p>
+<p>Tasks: <%= project.tasks %></p>
+<p>From <%= project.startDate.toDateString() %> to <%= project.endDate.toDateString() %></p>
+
+<h3>Team Members</h3>
+<% if (project.teamMembers.length > 0) { %>
+  <ul class="team-list">
+    <% project.teamMembers.forEach(m => { %>
+      <li><strong><%= m.name %></strong> – <%= m.role %></li>
+    <% }) %>
+  </ul>
+<% } else { %>
+  <p>No team members.</p>
+<% } %>
+
+<h4>Add Team Member</h4>
+<form action="/projects/<%= project._id %>/team" method="POST">
+  <label>Member Name</label>
+  <input name="name" required>
+  <label>Role</label>
+  <input name="role" required>
+  <button type="submit">Add Member</button>
+</form>

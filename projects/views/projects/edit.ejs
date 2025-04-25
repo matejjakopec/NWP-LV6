@@ -1,0 +1,38 @@
+<head>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+
+<h1>Edit Project</h1>
+
+<form action="/projects/<%= project._id %>?_method=PUT" method="POST">
+  <label>Project Name</label>
+  <input name="name" value="<%= project.name %>" placeholder="Project Name"><br>
+
+  <label>Description</label>
+  <textarea name="description" placeholder="Description"><%= project.description %></textarea><br>
+
+  <label>Price (EUR)</label>
+  <input name="price" type="number" value="<%= project.price %>" placeholder="Price"><br>
+
+  <label>Completed Tasks</label>
+  <input name="tasks" value="<%= project.tasks %>" placeholder="Tasks"><br>
+
+  <label>Start Date</label>
+  <input id="startDate" name="startDate" type="date" value="<%= project.startDate.toISOString().split('T')[0] %>"><br>
+
+  <label>End Date</label>
+  <input id="endDate" name="endDate" type="date" value="<%= project.endDate.toISOString().split('T')[0] %>"><br>
+
+  <button type="submit">Save Changes</button>
+</form>
+
+<a href="/projects">← Back to all projects</a>
+
+<script>
+const start = document.getElementById('startDate');
+const end = document.getElementById('endDate');
+
+start.addEventListener('change', () => {
+  end.min = start.value;
+});
+</script>

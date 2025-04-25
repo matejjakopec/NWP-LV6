@@ -1,0 +1,36 @@
+<head>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+
+<h1>New Project</h1>
+
+<form action="/projects" method="POST">
+  <label>Project Name</label>
+  <input name="name" required>
+
+  <label>Description</label>
+  <textarea name="description" required></textarea>
+
+  <label>Price (EUR)</label>
+  <input name="price" type="number" step="0.01" required>
+
+  <label>Completed Tasks</label>
+  <input name="tasks">
+
+  <label>Start Date</label>
+  <input id="startDate" name="startDate" type="date" required>
+
+  <label>End Date</label>
+  <input id="endDate" name="endDate" type="date" required>
+
+  <button type="submit">Save</button>
+</form>
+
+<script>
+  const start = document.getElementById('startDate');
+  const end = document.getElementById('endDate');
+
+  start.addEventListener('change', () => {
+    end.min = start.value;
+  });
+</script>

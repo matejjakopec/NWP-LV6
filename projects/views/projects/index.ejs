@@ -1,0 +1,28 @@
+<head>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+
+<h1>Projects</h1>
+
+<nav>
+  <a href="/projects/new">➕ New Project</a>
+</nav>
+
+<% if (projects.length === 0) { %>
+  <div class="project-card">
+    <p><strong>You currently have no projects.</strong></p>
+  </div>
+<% } else { %>
+  <% projects.forEach(p => { %>
+    <div class="project-card">
+      <h2><%= p.name %> <a href="/projects/<%= p._id %>">- VIEW</a></h2>
+      <small><a href="/projects/<%= p._id %>/edit">✏️ Edit</a></small>
+
+      <div class="project-actions">
+        <form action="/projects/<%= p._id %>?_method=DELETE" method="POST">
+          <button>Delete</button>
+        </form>
+      </div>
+    </div>
+  <% }); %>
+<% } %>
