@@ -6,22 +6,37 @@
 
 <form action="/projects/<%= project._id %>?_method=PUT" method="POST">
   <label>Project Name</label>
-  <input name="name" value="<%= project.name %>" placeholder="Project Name"><br>
+  <input name="name" value="<%= project.name %>" required><br>
 
   <label>Description</label>
-  <textarea name="description" placeholder="Description"><%= project.description %></textarea><br>
+  <textarea name="description" required><%= project.description %></textarea><br>
 
   <label>Price (EUR)</label>
-  <input name="price" type="number" value="<%= project.price %>" placeholder="Price"><br>
+  <input name="price" type="number" value="<%= project.price %>" required><br>
 
   <label>Completed Tasks</label>
-  <input name="tasks" value="<%= project.tasks %>" placeholder="Tasks"><br>
+  <input name="tasks" value="<%= project.tasks %>"><br>
 
   <label>Start Date</label>
-  <input id="startDate" name="startDate" type="date" value="<%= project.startDate.toISOString().split('T')[0] %>"><br>
+  <input id="startDate" name="startDate" type="date" value="<%= project.startDate.toISOString().split('T')[0] %>" required><br>
 
   <label>End Date</label>
-  <input id="endDate" name="endDate" type="date" value="<%= project.endDate.toISOString().split('T')[0] %>"><br>
+  <input id="endDate" name="endDate" type="date" value="<%= project.endDate.toISOString().split('T')[0] %>" required><br>
+
+  <label>Team Members</label>
+  <select name="teamMembers" multiple>
+    <% users.forEach(user => { %>
+      <option value="<%= user._id %>" 
+        <%= project.teamMembers.map(u => u.toString()).includes(user._id.toString()) ? 'selected' : '' %>>
+        <%= user.username %>
+      </option>
+    <% }); %>
+  </select><br>
+
+  <label>
+    <input type="checkbox" name="isArchived" <%= project.isArchived ? 'checked' : '' %>>
+    Archived
+  </label><br>
 
   <button type="submit">Save Changes</button>
 </form>

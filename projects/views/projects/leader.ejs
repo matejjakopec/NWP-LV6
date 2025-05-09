@@ -1,0 +1,42 @@
+<head>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+  </head>
+  
+  <h1>Your Projects (Leader)</h1>
+  
+  <nav>
+    <a href="/projects/new">New Project</a>
+    <a href="/projects/member">View Member Projects</a>
+    <a href="/projects">All Projects</a>
+  </nav>
+  
+  <% if (projects.length === 0) { %>
+    <p><strong>You are not leading any projects.</strong></p>
+  <% } else { %>
+    <% projects.forEach(p => { %>
+      <div class="project-card">
+        <h2><%= p.name %></h2>
+        <p><strong>Description:</strong> <%= p.description %></p>
+        <p><strong>Price:</strong> €<%= p.price %></p>
+        <p><strong>Completed Tasks:</strong> <%= p.tasks %></p>
+        <p><strong>Start:</strong> <%= p.startDate.toDateString() %></p>
+        <p><strong>End:</strong> <%= p.endDate.toDateString() %></p>
+        <p><strong>Archived:</strong> <%= p.isArchived ? 'Yes' : 'No' %></p>
+  
+        <h4>Team Members:</h4>
+        <ul>
+          <% p.teamMembers.forEach(member => { %>
+            <li><%= member.username || member %></li>
+          <% }) %>
+        </ul>
+  
+        <div class="project-actions">
+          <a href="/projects/<%= p._id %>">🔍 View</a>
+          <a href="/projects/<%= p._id %>/edit">✏️ Edit</a>
+          <form action="/projects/<%= p._id %>?_method=DELETE" method="POST" style="display:inline;">
+            <button>🗑️ Delete</button>
+          </form>
+        </div>
+      </div>
+    <% }) %>
+  <% } %>

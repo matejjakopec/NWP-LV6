@@ -23,6 +23,21 @@
   <label>End Date</label>
   <input id="endDate" name="endDate" type="date" required>
 
+  <label>Team Members</label>
+  <select name="teamMembers" multiple>
+    <% if (typeof users !== 'undefined' && users.length > 0) { %>
+      <% users.forEach(user => { %>
+        <option value="<%= user._id %>"><%= user.username %></option>
+      <% }); %>
+    <% } else { %>
+      <option disabled selected>No users available</option>
+    <% } %>
+  </select>
+
+  <label>
+    <input type="checkbox" name="isArchived"> Archived
+  </label>
+
   <button type="submit">Save</button>
 </form>
 

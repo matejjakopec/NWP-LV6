@@ -1,0 +1,17 @@
+<head>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+  </head>
+  
+  <div class="auth-container">
+    <h1>Login</h1>
+  
+    <form method="POST" action="/users/login" class="auth-form">
+      <input name="username" required placeholder="Username" />
+      <input name="password" type="password" required placeholder="Password" />
+      <button type="submit">Login</button>
+    </form>
+  
+    <p class="auth-link">
+      Don't have an account? <a href="/users/register">Register here</a>
+    </p>
+  </div>

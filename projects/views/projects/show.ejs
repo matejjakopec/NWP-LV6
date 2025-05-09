@@ -5,8 +5,15 @@
 <hr>
 
 <nav>
+  <% if (user) { %>
+    <span>👤 <%= user.username %></span>
+    <a href="/users/logout">Logout</a>
+    <a href="/projects/leader">Projects You Lead</a>
+    <a href="/projects/member">Projects You're a Member Of</a>
+  <% } %>
+
   <a href="/projects/new">➕ New Project</a>
-  <a href="/projects">All Projects</a>
+  <a href="/projects">📁 All Projects</a>
 </nav>
 
 <h1><%= project.name %></h1>
